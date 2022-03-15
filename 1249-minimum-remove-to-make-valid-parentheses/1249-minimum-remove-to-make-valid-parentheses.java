@@ -1,36 +1,35 @@
 class Solution {
-public:
-    string minRemoveToMakeValid(string s) {
-        
+    public String minRemoveToMakeValid(String s) {
         int n=s.length();
-        
-        int count=0; 
+        boolean[] f = new boolean[n];
+        Arrays.fill(f,true);
+        int count=0;
         for(int i=0;i<n;++i)
         {
-            if(s[i]=='(') ++count;
-            else if(s[i]==')'){ 
-                if(count==0) s[i]='#';
+            if(s.charAt(i)=='(') ++count;
+            else if(s.charAt(i)==')'){
+                if(count==0) f[i]=false;
                 else --count;
             }
         }
-        
-        
+
+
         count=0;
         for(int i=n-1;i>=0;--i)
         {
-            if(s[i]==')') ++count;
-            else if(s[i]=='(')
-            { 
-                if(count==0) s[i]='#';
+            if(s.charAt(i)==')') ++count;
+            else if(s.charAt(i)=='(')
+            {
+                if(count==0) f[i]=false;
                 else --count;
             }
         }
-        
-        string ans="";
+
+        StringBuilder sb = new StringBuilder();
         for(int i=0;i<n;++i)
         {
-            if(s[i]!='#') ans.push_back(s[i]);
+            if(f[i]==true) sb.append(s.charAt(i));
         }
-        return ans;
+        return sb.toString();
     }
-};
+}
