@@ -18,8 +18,6 @@ public:
         if(root->val<low) return trimBST(root->right,low,high);
         else if(root->val>high) return trimBST(root->left,low,high);
         
-        if(root->left && root->left->val<low) root->left = root->left->right;
-        else if(root->right && root->right->val>high) root->right = root->right->left;
         
         root->left = trimBST(root->left,low,high);
         root->right = trimBST(root->right,low,high);
