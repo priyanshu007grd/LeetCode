@@ -13,18 +13,22 @@ class Solution {
 public:
     TreeNode* increasingBST(TreeNode* root) 
     {
-        if(root->right!=NULL)  root->right=increasingBST(root->right);
-        if(root->left!=NULL)
+        if(root==NULL) return root;
+        
+        TreeNode* leftTree = increasingBST(root->left);
+        TreeNode* rightTree = increasingBST(root->right);
+        
+        if(leftTree!=NULL)
         {
-          TreeNode* leftTree = increasingBST(root->left);
-          root->left=NULL;
-            
-          TreeNode* p=leftTree;
-          while(p->right!=NULL) p=p->right;
-          p->right = root;
-            
-          root=leftTree;
+            TreeNode* p=leftTree;
+            while(p->right!=NULL) p=p->right;
+            p->right = root;
         }
-        return root;
+
+        
+        root->left=NULL;
+        root->right=rightTree;
+        
+        return leftTree==NULL?root:leftTree;
     }
 };
