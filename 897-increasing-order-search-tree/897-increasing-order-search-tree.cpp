@@ -18,16 +18,18 @@ public:
         TreeNode* leftTree = increasingBST(root->left);
         TreeNode* rightTree = increasingBST(root->right);
         
+        
+        root->right=rightTree;
+        
         if(leftTree!=NULL)
         {
             TreeNode* p=leftTree;
             while(p->right!=NULL) p=p->right;
             p->right = root;
+            
+            root->left=NULL;
         }
-
         
-        root->left=NULL;
-        root->right=rightTree;
         
         return leftTree==NULL?root:leftTree;
     }
