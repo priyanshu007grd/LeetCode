@@ -1,3 +1,4 @@
+// similar question : https://www.interviewbit.com/problems/arrange-ii/
 class Solution {
 public:
     int minDifficulty(vector<int>& jobDifficulty, int D) 
